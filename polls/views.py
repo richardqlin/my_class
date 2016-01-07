@@ -7,6 +7,8 @@ from django.core.urlresolvers import reverse
 
 from .models import Question,Choice
 
+from .forms import UserForm
+
 def index(request):
 	latest_question_list=Question.objects.order_by('-pub_date')[:5]
 	context={'latest_question_list':latest_question_list}
@@ -32,6 +34,19 @@ def vote(request,question_id):
 		selected_choice.save()
 
 		return HttpResponseRedirect(reverse("polls:results", args=(question_id,) ))
+
+def contact(request):
+	if request.method=='POST':
+		form=UserForm(request.POST)
+		if form.is_valid():
+			cd=form.cleaned_data
+			form.save()
+			return HttpResponse('Thanks')		
+		else:
+			return render(request,'polls/contact.html',{'form':form})
+	form=UserForm()
+	return render(request,'polls/contact.html',{'form':form})
+	
 
 '''
 class IndexView(generic.ListView):
