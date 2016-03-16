@@ -40,7 +40,7 @@ class UserProfile(models.Model):
 	state=models.CharField(max_length=30, choices=STATE_CHOICES)
 
 	def __unicode__(self):
-		return "%s - %s" %(self.firstname, self.lastname)
+		return "%s %s %s %s %s %s %s" %(self.firstname, self.lastname,self.age,self.email,self.street,self.city,self.state)
 
 class Publisher(models.Model):
 	name = models.CharField(max_length=30)
