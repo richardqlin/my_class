@@ -1,12 +1,34 @@
 <html>
 <body>
-<table>
+
+<h2 style="color:green"> List all users' Profiles:</h2>
+<table border='1' syyle='width:100%'>
+<tr>
+<td>UserName</td>
+<td>Name</td>
+<td>Age</td>
+<td>Email</td>
+<td>Street</td>
+<td>City</td>
+<td>State</td>
+</tr>
+
 {% for user in list %}
-	<li>Name: {{user.firstname}} {{user.lastname}} Age:{{user.age}}  </li>
-
+<tr>
+	<td>{{user.username}}</td>
+	<td>{{user.firstname}} {{user.lastname}} </td>
+	<td>{{user.age}}  </td>
+	<td>{{user.email}}</td>
+	<td>{{user.street}}</td>
+	<td>{{user.city}}</td>
+	<td>{{user.state}}</td>
+</tr>
 {% endfor %}
-
-	
 </table>
+
+<h3 style='color: green'>
+	Click <a href="/polls/contact_success/"> here </a> to contact menu.
+
+</h3>
 </body>
 </html>

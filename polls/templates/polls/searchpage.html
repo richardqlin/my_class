@@ -1,0 +1,18 @@
+
+
+
+
+{% for u in user %}
+<h3 style="color:blue">
+Here is {{u.username|capfirst}} Profile</h3>
+
+<li>Name: {{u.firstname}} {{u.lastname}}
+<li>Age: {{u.age}}</li>
+<li>Address: {{u.street}} </li>
+<li>City: {{u.city}}</li>
+<li>State: {{u.state}}</li>
+{% endfor %}
+<h3 style='color: green'>
+	Click <a href="/polls/contact_success/"> here </a> to contact menu.
+
+</h3>

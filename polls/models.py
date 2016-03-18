@@ -31,6 +31,7 @@ class Choice(models.Model):
 		return self.choice_text
 
 class UserProfile(models.Model):
+	username=models.CharField(max_length=30)
 	firstname=models.CharField(max_length=30)
 	lastname=models.CharField(max_length=30)
 	age=models.IntegerField()

@@ -9,6 +9,12 @@ from .models import Question,Choice,UserProfile
 
 from .forms import UserForm
 
+from django import forms
+
+class SearchForm(forms.Form):
+	text=forms.CharField(label='Enter username:')
+
+
 def index(request):
 	latest_question_list=Question.objects.order_by('-pub_date')[:5]
 	context={'latest_question_list':latest_question_list}
@@ -63,7 +69,16 @@ def list(request):
 	print l
 	return render(request,'polls/list.html',{'list':l})
 
-
+def search(request):
+	if request.method=='POST':
+		form=SearchForm(request.POST, None)
+		if form.is_valid():
+			user=UserProfile.objects.filter(username=form.cleaned_data['text'])
+			return render(request,'polls/searchpage.html',{'form':form,'user':user})
+		else:
+			return render(request,'polls/search.html',{'form':form})
+	form = SearchForm()
+	return render(request,'polls/search.html',{'form':form})
 '''
 class IndexView(generic.ListView):
 	template_name ='polls/index.html'
