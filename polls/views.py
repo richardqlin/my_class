@@ -40,6 +40,19 @@ def vote(request,question_id):
 		selected_choice.save()
 
 		return HttpResponseRedirect(reverse("polls:results", args=(question_id,) ))
+def update(request):
+	if request.method=='POST':
+		form=SearchForm(request.POST, None)
+		if form.is_valid():
+			user=UserProfile.objects.filter(username=form.cleaned_data['text'])
+			if request.method=='POST':
+				if user.is_valid():
+					user.save()
+					return HttpResponseRedirect('/polls/contact_update_success/')
+				else:
+					return render(request,'polls/contact_update.html',{'form':form})
+			user=UserForm()
+			return render(request,'polls/contact_update.html',{'form':form})
 
 def contact(request):
 	print request.POST
@@ -68,6 +81,7 @@ def list(request):
 		print u
 	print l
 	return render(request,'polls/list.html',{'list':l})
+
 
 def search(request):
 	if request.method=='POST':
